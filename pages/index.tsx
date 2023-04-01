@@ -1,16 +1,31 @@
 // import styles from '@/styles/Home.module.css';
+import React from 'react';
+import Hero from '@/components/home-page/Hero';
+import FeaturedPosts from '@/components/home-page/FeaturedPosts';
+import { Post } from '@/components/home-page/posts/post-item';
+import { getFeaturedPosts } from '@/lib/posts-util';
 
-import { CSSProperties } from 'react';
-
-export default function HomePage() {
-  return <div style={styles.container as CSSProperties}>Homepage</div>;
+interface Props {
+  posts: Post[];
 }
 
-const styles = {
-  container: {
-    textAlign: 'center',
-    fontSize: '30px',
-    border: '1px solid black',
-    height: 'calc(100vh - 40px)',
-  },
+const HomePage: React.FC<Props> = ({ posts }: Props) => {
+  return (
+    <>
+      <Hero />
+      <FeaturedPosts posts={posts} />
+    </>
+  );
 };
+
+export default HomePage;
+
+export function getStaticProps() {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+  };
+}
