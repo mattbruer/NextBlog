@@ -1,6 +1,7 @@
 import PostContent from '@/components/home-page/posts/post-detail/post-content';
 import { getPostData, getPostsFiles } from '@/lib/posts-util';
 import { GetStaticPropsContext } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -12,16 +13,20 @@ interface Post {
   image: string;
   date: string;
   content: string;
+  excerpt: string;
 }
 
 const PostDetailPage = (props: Props) => {
   const router = useRouter();
 
   return (
-    <div>
-      <p>{`${router.query.slug}'s post`}</p>
+    <>
+      <Head>
+        <title>{props.post.title}</title>
+        <meta name="description" content={`${props.post.excerpt}`} />
+      </Head>
       <PostContent post={props.post} />
-    </div>
+    </>
   );
 };
 
@@ -41,7 +46,7 @@ export function getStaticPaths() {
 
   return {
     paths: slugs.map((slug) => ({ params: { slug: slug } })),
-    fallback: true,
+    fallback: false,
   };
 }
 

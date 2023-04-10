@@ -6,7 +6,6 @@ interface Props {
   posts: Post[];
 }
 const FeaturedPosts = (props: Props) => {
-  console.log(props);
   return (
     <div className={classes.latest}>
       <h2>Featured posts</h2>
