@@ -9,7 +9,7 @@ const Hero = () => {
         <Image alt="hero" src="/images/site/me.jpg" width={300} height={300} />
       </div>
       <h1>Hi, I am matt</h1>
-      <p>I blog about frustration and despair.</p>
+      <p>I blog about web development.</p>
     </section>
   );
 };
